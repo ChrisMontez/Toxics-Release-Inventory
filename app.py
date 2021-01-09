@@ -38,42 +38,55 @@ available_indicators = df['CHEMICAL'].unique()
 
 app.layout = html.Div([
 	html.Div([
-	    html.Label('Chemicals'),
-		dcc.Dropdown(
-		id='chemical',
-		options=[{'label': i, 'value': i} for i in available_indicators],
-		value='STYRENE'
-		),
-		dcc.Graph(id='indicator-graphic')
-	])
+		html.Div([
+		    # html.Label('Chemicals'),
+			dcc.Dropdown(
+			id='selected_chemical',
+			options=[{'label': i, 'value': i} for i in available_indicators])
+		])
+	]),
+
+	dcc.Graph(id='graphic')
+
 
 ])
 
+
+
+@app.callback(dash.dependencies.Output("graphic","figure"),
+	[dash.dependencies.Input("selected_chemical","value")])
 # app.callback(
-# 	 Output('indicator-graphic', 'figure'),
-# 	 Input('chemical', 'value')
-# 	 )
+# 	[Output('graphic', 'figure')],
+# 	[Input('selected_chemical', 'value')])
 
 
-#     Output('example-graph', 'figure'),
-#     Input('chemical', 'value'))
 
-# def update_graph(chemical_name, chemical_value):
+def update_graph(input_value):
 
-# 	dff = df[df['CHEMICAL'] == chemical_value]
+	dff = df[df['CHEMICAL'] == input_value]
 
-# 	fig = px.density_mapbox(df, 
-# 		lat=dff[dff['Indicator Name'] == chemical_name]['LATITUDE'], 
-# 		lon=dff[dff['Indicator Name'] == chemical_name]['LONGITUDE'], 
-# 		z=dff[dff['Indicator Name'] == chemical_name]['STACK AIR'], 
-# 		radius=10,  
-# 		hover_data=["FACILITY NAME", "STACK AIR", "UNIT OF MEASURE"],
-# 	    zoom=2,
-# 	    labels={"STACK AIR": "Emissions (lbs)"},
-# 	    mapbox_style="stamen-terrain"
-# 	 )
 
-# 	return fig
+
+	fig = px.density_mapbox(dff, lat='LATITUDE', lon ='LONGITUDE', z='STACK AIR', radius=10,  hover_data=["FACILITY NAME", "STACK AIR", "UNIT OF MEASURE"],
+#                         center=dict(lat=0, lon=0), 
+                        zoom=2,
+                        # animation_frame="CHEMICAL",
+                        labels={"STACK AIR": "Emissions (lbs)"},
+                        mapbox_style="stamen-terrain")
+
+	# fig = px.density_mapbox(dff, 
+	# 	lat=df[df['Indicator Name'] == input_value]['LATITUDE'], 
+	# 	lon=df[df['Indicator Name'] == input_value]['LONGITUDE'], 
+	# 	z=df[df['Indicator Name'] == input_value]['STACK AIR'], 
+	# 	radius=10,  
+	# 	hover_data=["FACILITY NAME", "STACK AIR", "UNIT OF MEASURE"],
+	#     zoom=2,
+	#     labels={"STACK AIR": "Emissions (lbs)"},
+
+	#     mapbox_style="stamen-terrain"
+	#  )
+
+	return fig
 
 
 
