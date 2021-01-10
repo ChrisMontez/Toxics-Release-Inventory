@@ -10,6 +10,11 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
+colors = {
+    'background': '#000000',
+    'text': '#7FDBFF'
+}
+
 
 # Load Data
 df = pd.read_csv('tri_2019_us.csv')
@@ -18,6 +23,8 @@ available_indicators = df['CHEMICAL'].unique()
 
 
 app.layout = html.Div([
+	dcc.Graph(id='graphic', style={'width': '100%', 'float': 'right', 'display': 'inline-block'}),
+
 	html.Div([
 		html.Div([
 		    # html.Label('Chemicals'),
@@ -26,12 +33,12 @@ app.layout = html.Div([
 			value = 'STYRENE',
 			options=[{'label': i, 'value': i} for i in available_indicators])
 		])
-	]),
+	],style={'width': '55%','margin': '0 auto'}),
 
-	dcc.Graph(id='graphic')
+	# dcc.Graph(id='graphic', style={'width': '100%', 'float': 'right', 'display': 'inline-block'})
 
 
-])
+], style={'width': '75%','margin': '0 auto'})
 
 
 
@@ -42,15 +49,32 @@ app.layout = html.Div([
 def update_graph(input_value):
 
 	dff = df[df['CHEMICAL'] == input_value]
+	unit = dff['UNIT OF MEASURE'].unique()
+	unit_spec = str(unit[0])
+	# unit = 'test'
 
 
 
-	fig = px.density_mapbox(dff, lat='LATITUDE', lon ='LONGITUDE', z='STACK AIR', radius=10,  hover_data=["FACILITY NAME", "STACK AIR", "UNIT OF MEASURE"],
+	fig = px.density_mapbox(dff, 
+		lat='LATITUDE', 
+		lon ='LONGITUDE', 
+		z='STACK AIR', radius=10,  
+		hover_data=["FACILITY NAME"],
 #                         center=dict(lat=0, lon=0), 
-                        zoom=2,
+        zoom=2,
                         # animation_frame="CHEMICAL",
-                        labels={"STACK AIR": "Emissions (lbs)"},
-                        mapbox_style="stamen-terrain")
+        labels={"STACK AIR":unit_spec},
+                        # template = 'plotly_dark',
+        mapbox_style="carto-darkmatter")
+
+	fig.update_layout(
+    # plot_bgcolor=colors['background'],
+    paper_bgcolor=colors['background']
+    # font_color=colors['text']
+)
+
+	# fig.update_layout(title= '#ff0000')
+
 
 
 	return fig
