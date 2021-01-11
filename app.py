@@ -9,33 +9,44 @@ import dash_bootstrap_components as dbc
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+# app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
+	meta_tags=[{'name': 'viewport',
+				'content': 'width=device-width, initial-scale=1.0'}])
 
-
+server = app.server
 # Load Data
 df = pd.read_csv('tri_2019_us.csv')
-
 available_indicators = df['CHEMICAL'].unique()
 
 
-app.layout = html.Div([
-	dcc.Graph(id='graphic', style={'width': '100%', 'float': 'right', 'display': 'inline-block'}),
 
-	html.Div([
-		html.P('Choose a chemical to display on the map'),
-		html.Div([
-		    # html.Label('Chemicals'),
+
+app.layout = dbc.Container ([
+	dbc.Row([
+		dbc.Col(html.H1("Stack Emmisions [U.S.A]",
+			className='text-center text-primary mb-4'), 
+			width=12
+		)
+	]),
+
+	dbc.Row([
+		dbc.Col([
 			dcc.Dropdown(
-			id='selected_chemical',
-			value = 'STYRENE',
-			options=[{'label': i, 'value': i} for i in available_indicators])
-		])
-	],style={'width': '55%','margin': '0 auto'}),
+				id='selected_chemical',
+				value = 'STYRENE',
+				options=[{'label': i, 'value': i} for i in available_indicators]),
+		
+			dcc.Graph(
+				id='graphic',
+				
+			)
+		],width = {'size':12} ),
+		
+	],justify='center')
+], fluid=False)
 
-	
 
-
-], style={'width': '75%','margin': '0 auto'})
 
 
 
@@ -48,8 +59,6 @@ def update_graph(input_value):
 	dff = df[df['CHEMICAL'] == input_value]
 	unit = dff['UNIT OF MEASURE'].unique()
 	unit_spec = str(unit[0])
-	# unit = 'test'
-
 
 
 	fig = px.density_mapbox(dff, 
@@ -63,12 +72,7 @@ def update_graph(input_value):
                         # animation_frame="CHEMICAL",
         labels={"STACK AIR":unit_spec},
                         # template = 'plotly_dark',
-        mapbox_style="carto-darkmatter")
-
-
-
-
-
+        mapbox_style="open-street-map")
 
 	return fig
 
