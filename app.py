@@ -5,15 +5,11 @@ import plotly.express as px
 import pandas as pd
 import numpy as np
 from dash.dependencies import Input, Output
+import dash_bootstrap_components as dbc
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-
-colors = {
-    'background': '#000000',
-    'text': '#7FDBFF'
-}
 
 
 # Load Data
@@ -26,6 +22,7 @@ app.layout = html.Div([
 	dcc.Graph(id='graphic', style={'width': '100%', 'float': 'right', 'display': 'inline-block'}),
 
 	html.Div([
+		html.P('Choose a chemical to display on the map'),
 		html.Div([
 		    # html.Label('Chemicals'),
 			dcc.Dropdown(
@@ -35,7 +32,7 @@ app.layout = html.Div([
 		])
 	],style={'width': '55%','margin': '0 auto'}),
 
-	# dcc.Graph(id='graphic', style={'width': '100%', 'float': 'right', 'display': 'inline-block'})
+	
 
 
 ], style={'width': '75%','margin': '0 auto'})
@@ -62,18 +59,14 @@ def update_graph(input_value):
 		hover_data=["FACILITY NAME"],
 #                         center=dict(lat=0, lon=0), 
         zoom=2,
+
                         # animation_frame="CHEMICAL",
         labels={"STACK AIR":unit_spec},
                         # template = 'plotly_dark',
         mapbox_style="carto-darkmatter")
 
-	fig.update_layout(
-    # plot_bgcolor=colors['background'],
-    paper_bgcolor=colors['background']
-    # font_color=colors['text']
-)
 
-	# fig.update_layout(title= '#ff0000')
+
 
 
 
