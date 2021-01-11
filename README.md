@@ -8,5 +8,5 @@ The dataset titled 'tri_2019_us.csv' was provided by the Enviromental Protection
 
 
 ## Progress
-**Early Phase**
+**Early Phase:**
 Current state of project can be found at [chem-emission-dashboard-19214.herokuapp.com](https://chem-emission-dashboard-19214.herokuapp.com) . 
