@@ -8,19 +8,17 @@ import numpy as np
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-# app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
 	meta_tags=[{'name': 'viewport',
 				'content': 'width=device-width, initial-scale=1.0'}])
 
 server = app.server
-# Load Data
 df = pd.read_csv('tri_2019_us.csv')
 available_indicators = df['CHEMICAL'].unique()
 
-
+px.set_mapbox_access_token('pk.eyJ1IjoibGl0aGl1bXJvYm90IiwiYSI6ImNranUyNGQyMjcweDgyeXA5cHkxdnJ2Z2wifQ.cxBUPa2rO27ZF-qacR8XbQ')
 
 
 app.layout = dbc.Container ([
@@ -45,7 +43,7 @@ app.layout = dbc.Container ([
 		],width = {'size':12} ),
 		
 	],justify='center')
-], fluid=False)
+], fluid=False,)
 
 
 
@@ -68,12 +66,15 @@ def update_graph(input_value):
 		z='STACK AIR', radius=10,  
 		hover_data=["FACILITY NAME"],
 #                         center=dict(lat=0, lon=0), 
+
         zoom=2,
 
                         # animation_frame="CHEMICAL",
         labels={"STACK AIR":unit_spec},
                         # template = 'plotly_dark',
-        mapbox_style="open-street-map")
+        mapbox_style="satellite-streets"
+
+    )
 
 	return fig
 
