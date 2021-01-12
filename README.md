@@ -21,5 +21,5 @@ Current state of project can be found at [chem-emission-dashboard-19214.herokuap
 
 
 <p  align = "center" >
-<img src="img/3.PNG" width="500">
+<img src="img/3.png" width="500">
 </p>
