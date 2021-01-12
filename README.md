@@ -24,7 +24,7 @@ Current state of project can be found at [chem-emission-dashboard-19214.herokuap
 <img src="img/3.png" width="500">
 </p>
 
-# To DO
+# To Do
 * Format the map to fit full page on desktop
 * Format for mobile
 * Incorporate CAS number to pull the structure and toxicity data of each chemical.
