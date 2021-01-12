@@ -12,7 +12,6 @@ The dataset titled 'tri_2019_us.csv' was provided by the Enviromental Protection
 Current state of project can be found at [chem-emission-dashboard-19214.herokuapp.com](https://chem-emission-dashboard-19214.herokuapp.com) . 
 
 <p  align = "center" >
-[Screenshots]
 <img src="img/1.PNG" width="500">
 </p>
 
