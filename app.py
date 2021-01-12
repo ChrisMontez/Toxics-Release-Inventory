@@ -10,13 +10,13 @@ import dash_bootstrap_components as dbc
 
 # external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-# app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
-# 	meta_tags=[{'name': 'viewport',
-# 				'content': 'width=device-width, initial-scale=1.0'}])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
+	meta_tags=[{'name': 'viewport',
+				'content': 'width=device-width, initial-scale=1.0'}])
 
-app = dash.Dash(
-    __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}]
-)
+# app = dash.Dash(
+#     __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}]
+# )
 server = app.server
 df = pd.read_csv('tri_2019_us.csv')
 available_indicators = df['CHEMICAL'].unique()
@@ -30,146 +30,62 @@ px.set_mapbox_access_token('pk.eyJ1IjoibGl0aGl1bXJvYm90IiwiYSI6ImNranUyNGQyMjcwe
 #########################################################################
 
 # Layout of Dash App
-app.layout = html.Div(
-    children=[
-        html.Div(
-            className="row",
-            children=[
-                # Column for user controls
-                html.Div(
-                    className="four columns div-user-controls",
-                    children=[
-                        # html.Img(
-                        #     className="logo", src=app.get_asset_url("dash-logo-new.png")
-                        # ),
-                        html.H2("Stack Emmisions - USA"),
-                        html.P(
-                            """Select a chemical using the dropdown box."""
-                        ),
+# app.layout = html.Div(
+#     children=[
+#         html.Div(
+#             className="row",
+#             children=[
+#                 # Column for user controls
+#                 html.Div(
+#                     className="four columns div-user-controls",
+#                     children=[
+#                         # html.Img(
+#                         #     className="logo", src=app.get_asset_url("dash-logo-new.png")
+#                         # ),
+#                         html.H2("Stack Emmisions - USA"),
+#                         html.P(
+#                             """Select a chemical using the dropdown box."""
+#                         ),
 
-                        # Change to side-by-side for mobile layout
-                        html.Div(
-                            className="row",
-                            children=[
-                                html.Div(
-                                    className="div-for-dropdown",
-                                    children=[
-                                        # Dropdown for locations on map
-                                        dcc.Dropdown(
-											id='selected_chemical',
-											value = 'STYRENE',
-											options=[{'label': i, 'value': i} for i in available_indicators])
+#                         # Change to side-by-side for mobile layout
+#                         html.Div(
+#                             className="row",
+#                             children=[
+#                                 html.Div(
+#                                     className="div-for-dropdown",
+#                                     children=[
+#                                         # Dropdown for locations on map
+#                                         dcc.Dropdown(
+# 											id='selected_chemical',
+# 											value = 'STYRENE',
+# 											options=[{'label': i, 'value': i} for i in available_indicators])
     
-                                    ],
-                                ),
+#                                     ],
+#                                 ),
 
-                            ],
-                        ),
+#                             ],
+#                         ),
  
-                    ],
-                ),
-                # Column for app graphs and plots
-                html.Div(
-                    className="eight columns div-for-charts bg-grey",
-                    children=[
-                        dcc.Graph(id='graphic')
-                        # html.Div(
-                        #     className="text-padding",
-                        #     children=[
-                        #         "Select any of the bars on the histogram to section data by time."
-                        #     ],
-                        # ),
-                        # dcc.Graph(id="histogram"),
-                    ],
-                ),
-            ],
-        )
-    ]
-)
-
-
-
-@app.callback(dash.dependencies.Output("graphic","figure"),
-	[dash.dependencies.Input("selected_chemical","value")])
-
-
-def update_graph(input_value):
-
-	dff = df[df['CHEMICAL'] == input_value]
-	unit = dff['UNIT OF MEASURE'].unique()
-	unit_spec = str(unit[0])
-
-
-	fig = px.density_mapbox(dff, 
-		lat='LATITUDE', 
-		lon ='LONGITUDE', 
-		z='STACK AIR', radius=10,  
-		hover_data=["FACILITY NAME"],
-#                         center=dict(lat=0, lon=0), 
-
-        zoom=2,
-
-                        # animation_frame="CHEMICAL",
-        labels={"STACK AIR":unit_spec},
-                        # template = 'plotly_dark',
-        mapbox_style="satellite-streets"
-
-    )
-
-	return fig
-
-if __name__ == "__main__":
-    app.run_server(debug=True)
-
-
-
-
-#############################################################################
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# app.layout = dbc.Container ([
-# 	dbc.Row([
-# 		dbc.Col(html.H1("Stack Emmisions [U.S.A]",
-# 			className='text-center mb-4'), 
-# 			width=12
-# 		)
-# 	]),
-
-# 	dbc.Row([
-# 		dbc.Col([
-# 			dcc.Dropdown(
-# 				id='selected_chemical',
-# 				value = 'STYRENE',
-# 				options=[{'label': i, 'value': i} for i in available_indicators]),
-		
-# 			dcc.Graph(
-# 				id='graphic',
-				
-# 			)
-# 		],width = {'size':12} ),
-		
-# 	],justify='center')
-
-# ], fluid=False,)
-
-
+#                     ],
+#                 ),
+#                 # Column for app graphs and plots
+#                 html.Div(
+#                     className="eight columns div-for-charts bg-grey",
+#                     children=[
+#                         dcc.Graph(id='graphic')
+#                         # html.Div(
+#                         #     className="text-padding",
+#                         #     children=[
+#                         #         "Select any of the bars on the histogram to section data by time."
+#                         #     ],
+#                         # ),
+#                         # dcc.Graph(id="histogram"),
+#                     ],
+#                 ),
+#             ],
+#         )
+#     ]
+# )
 
 
 
@@ -202,8 +118,92 @@ if __name__ == "__main__":
 
 # 	return fig
 
-
-
-
-# if __name__ == '__main__':
+# if __name__ == "__main__":
 #     app.run_server(debug=True)
+
+
+
+
+#############################################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.layout = dbc.Container ([
+	dbc.Row([
+		dbc.Col(html.H1("Stack Emmisions [U.S.A]",
+			className='text-center mb-4'), 
+			width=12
+		)
+	]),
+
+	dbc.Row([
+		dbc.Col([
+			dcc.Dropdown(
+				id='selected_chemical',
+				value = 'STYRENE',
+				options=[{'label': i, 'value': i} for i in available_indicators]),
+		
+			dcc.Graph(
+				id='graphic',
+				
+			)
+		],width = {'size':12} ),
+		
+	],justify='center')
+
+], fluid=False,)
+
+
+
+
+
+@app.callback(dash.dependencies.Output("graphic","figure"),
+	[dash.dependencies.Input("selected_chemical","value")])
+
+
+def update_graph(input_value):
+
+	dff = df[df['CHEMICAL'] == input_value]
+	unit = dff['UNIT OF MEASURE'].unique()
+	unit_spec = str(unit[0])
+
+
+	fig = px.density_mapbox(dff, 
+		lat='LATITUDE', 
+		lon ='LONGITUDE', 
+		z='STACK AIR', radius=10,  
+		hover_data=["FACILITY NAME"],
+#                         center=dict(lat=0, lon=0), 
+
+        zoom=2,
+
+                        # animation_frame="CHEMICAL",
+        labels={"STACK AIR":unit_spec},
+                        # template = 'plotly_dark',
+        mapbox_style="satellite-streets"
+
+    )
+
+	return fig
+
+
+
+
+if __name__ == '__main__':
+    app.run_server(debug=True)
