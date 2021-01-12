@@ -34,7 +34,7 @@ a {
 /* Graph Layout ––––––––––––––––––––––––––––––––––––––––––––––––––*/
 .div-for-charts{
   display: flex;
-  flex-direction: column | row;
+  flex-direction: column;
   height: 100vh;
   width: 100%;
 }
