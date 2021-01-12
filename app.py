@@ -63,7 +63,7 @@ app.layout = html.Div(
                 ),
                 # Column for app graphs and plots
                 html.Div(
-                    className="eight columns div-for-charts bg-grey",
+                    className="eight columns div-for-charts2 div-for-charts bg-grey",
                     children=[
                         dcc.Graph(id='graphic')
 

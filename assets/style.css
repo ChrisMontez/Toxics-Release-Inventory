@@ -32,9 +32,10 @@ a {
   padding: 5px;
 }
 /* Graph Layout ––––––––––––––––––––––––––––––––––––––––––––––––––*/
+
 .div-for-charts{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   height: 100vh;
   width: 100%;
 }
