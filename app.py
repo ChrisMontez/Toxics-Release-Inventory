@@ -24,7 +24,7 @@ px.set_mapbox_access_token('pk.eyJ1IjoibGl0aGl1bXJvYm90IiwiYSI6ImNranUyNGQyMjcwe
 app.layout = dbc.Container ([
 	dbc.Row([
 		dbc.Col(html.H1("Stack Emmisions [U.S.A]",
-			className='text-center text-primary mb-4'), 
+			className='text-center  mb-4'), 
 			width=12
 		)
 	]),
