@@ -10,13 +10,13 @@ import dash_bootstrap_components as dbc
 
 # external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
-	meta_tags=[{'name': 'viewport',
-				'content': 'width=device-width, initial-scale=1.0'}])
+# app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
+# 	meta_tags=[{'name': 'viewport',
+# 				'content': 'width=device-width, initial-scale=1.0'}])
 
-# app = dash.Dash(
-#     __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}]
-# )
+app = dash.Dash(
+    __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}]
+)
 server = app.server
 df = pd.read_csv('tri_2019_us.csv')
 available_indicators = df['CHEMICAL'].unique()
