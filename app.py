@@ -45,7 +45,7 @@ px.set_mapbox_access_token('pk.eyJ1IjoibGl0aGl1bXJvYm90IiwiYSI6ImNranUyNGQyMjcwe
 
 
 
-
+app.title = 'CJM' 
 
 
 ### BLUE ONE
