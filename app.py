@@ -64,9 +64,9 @@ app.layout = html.Div(
                         # html.Img(
                         #     className="logo", src=app.get_asset_url("dash-logo-new.png")
                         # ),
-                        html.H1("STACK CHEMICAL EMMISIONS"),
-                        html.H2("United States Industrial Facilities"),
-                        html.H2("Year : 2019"),
+                        html.H1(["STACK CHEMICAL AIR EMMISIONS"]),
+                        html.H2(["United States Industrial Facilities"]),
+                        html.H3(["Year - 2019"]),
 
                         html.P(
                             """Select a chemical using the dropdown menu below. 
