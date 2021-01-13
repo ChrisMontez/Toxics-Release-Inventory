@@ -10,17 +10,39 @@ import dash_bootstrap_components as dbc
 
 # external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-# app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
-# 	meta_tags=[{'name': 'viewport',
-# 				'content': 'width=device-width, initial-scale=1.0'}])
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
+	meta_tags=[{'name': 'viewport',
+				'content': 'width=device-width, initial-scale=1.0'}])
 
-app = dash.Dash(
-    __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}]
-)
+# app = dash.Dash(
+#     __name__, meta_tags=[{"name": "viewport", "content": "width=device-width"}]
+# )
 server = app.server
 df = pd.read_csv('tri_2019_us.csv')
 available_indicators = df['CHEMICAL'].unique()
 px.set_mapbox_access_token('pk.eyJ1IjoibGl0aGl1bXJvYm90IiwiYSI6ImNranUyNGQyMjcweDgyeXA5cHkxdnJ2Z2wifQ.cxBUPa2rO27ZF-qacR8XbQ')
+
+
+# fig = px.density_mapbox()
+
+# fig.update_layout(
+#     margin=dict(l=20, r=20, t=20, b=20),
+#     paper_bgcolor="LightSteelBlue",)
+
+
+
+
+# config = {
+#   'toImageButtonOptions': {
+#     'format': 'svg', # one of png, svg, jpeg, webp
+#     'filename': 'custom_image',
+#     'height': 500,
+#     'width': 700,
+#     'scale': 1 # Multiply title/legend/axis/canvas sizes by this factor
+#   }
+# }
+
+
 
 
 
@@ -47,7 +69,7 @@ app.layout = html.Div(
                             """Select a chemical using the dropdown box."""
                         ),
 
-                         html.Div(
+                        html.Div(
                             className="div-for-dropdown",
                             children=[
                                dcc.Dropdown(
@@ -62,14 +84,48 @@ app.layout = html.Div(
                     ],
                 ),
                 # Column for app graphs and plots
-                html.Div(
-                    className="eight columns div-for-charts2 div-for-charts bg-grey",
+                html.Div( 
+                    className="eight columns div-for-charts bg-grey",
                     children=[
-                        dcc.Graph(id='graphic')
 
+        	            html.Div(
+        	                className="div-for-charts0",
+        	                children=[
+        	                    dcc.Graph(
+                                    id='graphic',
+                                    config={
+                                        'responsive': True,
+                                        # 'fillFrame': True,
+                                        'autosizable': True,  
+                                    }
+
+
+
+                                    # figure={
+                                    #     'layout':{
+                                    #         'autosize': True,
+                                    #         'margin': {'autoexpand':True}
+                                    #         # 'title':'test',
+                                    #         # 'margin': {
+                                    #         #     'l': 200,
+                                    #         #     'b': 20,
+                                    #         #     'r': 10,
+                                    #         #     't': 60
+                                    #         # }
+                                    #         # 'width':100
+
+                                            
+
+                                    #     }
+                                    # }
+                                      
+                                 )
+
+        	                ]
+        	            )
                     ],
                 ),
-            ],
+            ]
         )
     ]
 )
@@ -86,23 +142,25 @@ def update_graph(input_value):
 	unit = dff['UNIT OF MEASURE'].unique()
 	unit_spec = str(unit[0])
 
+	fig = px.density_mapbox(dff,
 
-	fig = px.density_mapbox(dff, 
 		lat='LATITUDE', 
 		lon ='LONGITUDE', 
 		z='STACK AIR', radius=10,  
 		hover_data=["FACILITY NAME"],
-#                         center=dict(lat=0, lon=0), 
-
         zoom=2,
-
-                        # animation_frame="CHEMICAL",
+        # width=1000,
         labels={"STACK AIR":unit_spec},
-                        # template = 'plotly_dark',
-        mapbox_style="satellite-streets"
+        mapbox_style="satellite-streets",
+        # layout=''
+        # config={'responsive': True,
+        #         'fillFrame': True,
+        #         'autosizable': True,  
+        #          }
+
 
     )
-
+  
 	return fig
 
 if __name__ == "__main__":
