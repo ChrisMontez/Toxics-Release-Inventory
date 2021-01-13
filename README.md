@@ -17,21 +17,9 @@ Current state of project can be found at [chem-emission-dashboard-19214.herokuap
 	</a>
 </p>
 
-<!-- <p  align = "center" >
-<img src="img/2.PNG" width="500">
-</p>
- -->
-
 <p align="center" >
 	<a href = 'https://chem-emission-dashboard-19214.herokuapp.com/'>
-  	<img  src="img/2.PNG" width="500" />
-	</a>
-</p>
-
-
-<p align="center" >
-	<a href = 'https://chem-emission-dashboard-19214.herokuapp.com/'>
-  	<img  src="img/3.png" width="500" />
+  	<img  src="img/2.png" width="500" />
 	</a>
 </p>
 
