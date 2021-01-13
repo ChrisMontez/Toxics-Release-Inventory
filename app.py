@@ -97,7 +97,9 @@ app.layout = html.Div(
                                         'responsive': True,
                                         # 'fillFrame': True,
                                         'autosizable': True,  
+
                                     }
+
 
 
 

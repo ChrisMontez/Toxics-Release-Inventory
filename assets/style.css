@@ -39,7 +39,7 @@ a {
  justify-content: stretch;    
 
   height: 100vh;
-  width: 100%;
+/*  width: 100%;*/
 }
 .div-for-charts0{
   display: grid;
@@ -200,9 +200,13 @@ a {
   }
   .div-for-charts{
     margin: 0px;
+ /*   display: flex;
+    flex-direction: column; */
   }
   .div-for-charts0{
     margin: 0px;
+   display: flex;
+   flex-direction: column; 
   }
 } 
 
