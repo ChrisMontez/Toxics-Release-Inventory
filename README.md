@@ -1,4 +1,4 @@
-# Toxics-Release-Inventory - Work in Progress
+# Toxics-Release-Inventory
 
 ## Objective 
  Analyze the release of chemical emissions from industrial facilities around the United States.
