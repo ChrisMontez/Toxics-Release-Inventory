@@ -70,7 +70,7 @@ app.layout = html.Div(
 
                         html.P(
                             """Select a chemical using the dropdown menu below. 
-                            The resulting Choropleth map will display the related emission data from each industrial facility emitting the specified chemical. Zoom in to learn more about each facility."""
+                            The resulting Choropleth map will display the related emission data from each industrial facility emitting the specified chemical. Zoom in and interact with the map to learn more about each facility."""
                         ),
 
                         html.Div(
