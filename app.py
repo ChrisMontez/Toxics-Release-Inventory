@@ -45,7 +45,7 @@ px.set_mapbox_access_token('pk.eyJ1IjoibGl0aGl1bXJvYm90IiwiYSI6ImNranUyNGQyMjcwe
 
 
 
-app.title = 'CJM' 
+app.title = 'Chemical Emissions - United States' 
 
 
 ### BLUE ONE
@@ -64,7 +64,7 @@ app.layout = html.Div(
                         # html.Img(
                         #     className="logo", src=app.get_asset_url("dash-logo-new.png")
                         # ),
-                        html.H1(["STACK CHEMICAL AIR EMMISIONS"]),
+                        html.H1(["STACK CHEMICAL AIR EMISSIONS "]),
                         html.H2(["United States Industrial Facilities"]),
                         html.H3(["Year - 2019"]),
 
