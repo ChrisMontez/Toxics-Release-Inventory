@@ -23,28 +23,6 @@ available_indicators = df['CHEMICAL'].unique()
 px.set_mapbox_access_token('pk.eyJ1IjoibGl0aGl1bXJvYm90IiwiYSI6ImNranUyNGQyMjcweDgyeXA5cHkxdnJ2Z2wifQ.cxBUPa2rO27ZF-qacR8XbQ')
 
 
-# fig = px.density_mapbox()
-
-# fig.update_layout(
-#     margin=dict(l=20, r=20, t=20, b=20),
-#     paper_bgcolor="LightSteelBlue",)
-
-
-
-
-# config = {
-#   'toImageButtonOptions': {
-#     'format': 'svg', # one of png, svg, jpeg, webp
-#     'filename': 'custom_image',
-#     'height': 500,
-#     'width': 700,
-#     'scale': 1 # Multiply title/legend/axis/canvas sizes by this factor
-#   }
-# }
-
-
-
-
 app.title = 'Chemical Emissions - United States' 
 
 
@@ -105,25 +83,6 @@ app.layout = html.Div(
                                     }
 
 
-
-
-                                    # figure={
-                                    #     'layout':{
-                                    #         'autosize': True,
-                                    #         'margin': {'autoexpand':True}
-                                    #         # 'title':'test',
-                                    #         # 'margin': {
-                                    #         #     'l': 200,
-                                    #         #     'b': 20,
-                                    #         #     'r': 10,
-                                    #         #     't': 60
-                                    #         # }
-                                    #         # 'width':100
-
-                                            
-
-                                    #     }
-                                    # }
                                       
                                  )
 
@@ -145,9 +104,10 @@ app.layout = html.Div(
 def update_graph(input_value):
 
 	dff = df[df['CHEMICAL'] == input_value]
+    # chemical = dff['CHEMICAL']
 	unit = dff['UNIT OF MEASURE'].unique()
 	unit_spec = str(unit[0])
-
+    
 	fig = px.density_mapbox(dff,
 
 		lat='LATITUDE', 
@@ -155,17 +115,13 @@ def update_graph(input_value):
 		z='STACK AIR', radius=10,  
 		hover_data=["FACILITY NAME"],
         zoom=2,
-        # width=1000,
         labels={"STACK AIR":unit_spec},
         mapbox_style="satellite-streets",
-        # layout=''
-        # config={'responsive': True,
-        #         'fillFrame': True,
-        #         'autosizable': True,  
-        #          }
-
-
+        title= (input_value)
     )
+
+ 
+
   
 	return fig
 
