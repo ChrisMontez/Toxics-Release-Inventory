@@ -117,13 +117,17 @@ def update_graph(input_value):
         zoom=2,
         labels={"STACK AIR":unit_spec},
         mapbox_style="satellite-streets",
-        title= ('UNITED STATES INDUSTRIAL FACILITIES EMITTING ' + input_value)
+        title= ('UNITED STATES INDUSTRIAL FACILITIES EMITTING ' + input_value),
+        template={}
     )
 
- 
 
-  
+
+    
 	return fig
+
+
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)
