@@ -121,8 +121,8 @@ def update_graph(input_value):
 		hover_data=["FACILITY NAME"],
         zoom=2,
         labels={"STACK AIR":unit_spec},
-        mapbox_style="satellite-streets",
-        title= (input_value )
+        mapbox_style="satellite-streets"
+        # title= (input_value )
       
     )
 
