@@ -101,6 +101,11 @@ app.layout = html.Div(
 	[dash.dependencies.Input("selected_chemical","value")])
 
 
+
+
+
+
+
 def update_graph(input_value):
 
 	dff = df[df['CHEMICAL'] == input_value]
@@ -117,7 +122,7 @@ def update_graph(input_value):
         zoom=2,
         labels={"STACK AIR":unit_spec},
         mapbox_style="satellite-streets",
-        title= ('FACILITIES EMITTING ' + input_value),
+        title= (input_value ),
       
     )
 
