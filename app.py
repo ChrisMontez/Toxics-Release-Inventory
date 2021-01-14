@@ -122,7 +122,7 @@ def update_graph(input_value):
         zoom=2,
         labels={"STACK AIR":unit_spec},
         mapbox_style="satellite-streets",
-        title= (input_value ),
+        title= (input_value )
       
     )
 
