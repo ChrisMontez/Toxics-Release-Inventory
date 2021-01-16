@@ -26,4 +26,4 @@ Current state of project can be found at [chem-emission-dashboard-19214.herokuap
 ## To Do
 * Center corresponding chemical title on map
 * Incorporate CAS number to pull the structure and toxicity data of each chemical.
-* Create visualizations using chemical substance data pulled.
+* Create visualizations using substance data pulled.
