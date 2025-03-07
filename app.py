@@ -20,7 +20,7 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP],
 server = app.server
 df = pd.read_csv('tri_2019_us.csv')
 available_indicators = df['CHEMICAL'].unique()
-px.set_mapbox_access_token('pk.eyJ1IjoibGl0aGl1bXJvYm90IiwiYSI6ImNranUyNGQyMjcweDgyeXA5cHkxdnJ2Z2wifQ.cxBUPa2rO27ZF-qacR8XbQ')
+px.set_mapbox_access_token('')
 
 
 app.title = 'Chemical Emissions - United States' 
